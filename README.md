@@ -1,7 +1,9 @@
+![example IFS](https://raw.githubusercontent.com/jtauber/pyifs/master/example.png)
+
 An Iterated Function System in Python
 =====================================
 
-Initially written under the guidance of Thomas Ludwig one night at KiwiFoo.
+This is a fork of [James Tauber's](https://github.com/jtauber/pyifs) initial work. 
 
 The tone-mapped image handling comes from Minilight.
 
@@ -12,22 +14,13 @@ Running
 
 Just run
 
-    python pyifs.py
+    python pyifs.py [configuration file]
+    
 
-You can change the output filename at the bottom of `pyifs.py`
-
-NOTE: You may want to provide a seed with `random.seed()` so if you get a
-nice result, you can re-run it at higher resolution, etc.
-
-Customization
+Configuration
 -------------
 
-Parts of the code that can be customized are marked `CUSTOMIZE` in `pyifs.py`
-
-* You can adjust the `WIDTH`, `HEIGHT`, `ITERATIONS`, `NUM_POINTS` and
-  `NUM_TRANSFORMS`
-* You can write new `Transform` classes
-* You can pick which transforms to choose from in `TRANSFORM_CHOICES`
+The iterated function system is customizable by using a json configure file ([example](configs/sierpinski.json)).
 
 Writing New Transforms
 ----------------------
@@ -36,14 +29,19 @@ A new subclass of `Transform` should randomize its parameters in `__init__`
 then implement a `transform` method that takes two args (the x, y of the
 point) and returns a new x, y.
 
-Alternatively, you can subclass `ComplexTransform` and instead of implementing
-`transform` instead implement a method `f` that takes a single complex number
-argument and returns anew complex number.
+
+To-do
+-----
+
+- Check on why fern is not centered
+- Allow customization of image output (background, color schemes)
+- Make an easier input method?
+- add non probabilistic mode and allow for viewing of iterated steps
 
 Examples
 --------
 
-![example IFS](https://raw.githubusercontent.com/jtauber/pyifs/master/example.png)
+
 ![example IFS2](https://raw.githubusercontent.com/jtauber/pyifs/master/example2.png)
 ![example IFS3](https://raw.githubusercontent.com/jtauber/pyifs/master/example3.png)
 ![example IFS4](https://raw.githubusercontent.com/jtauber/pyifs/master/example4.png)

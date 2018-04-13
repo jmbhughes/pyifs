@@ -12,9 +12,7 @@ DISPLAY_LUMINANCE_MAX = 200.0
 # formula from Ward "A Contrast-Based Scalefactor for Luminance Display"
 SCALEFACTOR_NUMERATOR = 1.219 + (DISPLAY_LUMINANCE_MAX * 0.25) ** 0.4
 
-
 GAMMA_ENCODE = 0.45
-
 
 class Image(object):
 

@@ -1,0 +1,30 @@
+{
+    "image_settings":{
+        "width":512,
+        "height":512,
+        "path":"fern.png"
+    },
+    "evaluation_settings":{
+        "iterations":10000,
+        "num_points":1000
+    },
+    "transforms":{
+        "AffineTransform":
+        [{
+            "matrix":[[0.0,0.0],[0.0,0.16]],
+            "translation":[0.0,0.0]
+        },
+         {
+             "matrix":[[0.85,0.04],[-0.04,0.85]],
+             "translation":[0.0,1.6]
+         },
+         {
+             "matrix":[[0.2,-0.26],[0.23,0.22]],
+             "translation":[0.0,1.6]
+         },
+         {
+             "matrix":[[-0.15,0.28],[0.26,0.24]],
+             "translation":[0.0,0.44]
+         }]
+    }
+}
