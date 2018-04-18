@@ -1,0 +1,14 @@
+{
+    "image_settings":{
+        "width":512,
+        "height":512,
+        "path":"affine.png"
+    },
+    "evaluation_settings":{
+        "iterations":10000,
+        "num_points":1000
+    },
+    "transforms":{
+        "RandomAffineTransform":[{},{},{},{}]
+    }
+}

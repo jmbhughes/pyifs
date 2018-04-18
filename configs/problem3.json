@@ -1,0 +1,34 @@
+{
+    "image_settings":{
+        "width":512,
+        "height":512,
+        "path":"problem3.png"
+    },
+    "evaluation_settings":{
+        "iterations":10000,
+        "num_points":1000
+    },
+    "transforms":{
+        "AffineTransform":
+        [{
+            "matrix":[[0.333,0.0],[0.0,0.333]],
+            "translation":[-1.333333,1.333333]
+        },
+         {
+             "matrix":[[0.333,0.0],[0.0,0.333]],
+             "translation":[0.0,1.333333]
+         },
+         {
+             "matrix":[[0.333,0.0],[0.0,0.333]],
+             "translation":[0.0,0.0]
+         },
+         {
+             "matrix":[[0.333,0.0],[0.0,0.333]],
+             "translation":[1.333333,1.333333]
+         },
+         {
+             "matrix":[[0.333,0.0],[0.0,0.333]],
+             "translation":[0.0,-1.333333]
+         }]
+    }
+}

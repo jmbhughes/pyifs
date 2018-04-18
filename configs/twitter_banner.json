@@ -1,0 +1,19 @@
+{
+    "image_settings":{
+        "width":1500,
+        "height":500,
+        "path":"banner.png"
+    },
+    "evaluation_settings":{
+        "iterations":10000,
+        "num_points":1000
+    },
+    "transforms":{
+        "RandomLinearTransform":[{},{},{}],
+        "MoebiusTransform":[{},{},{}]
+    }
+}
+        
+        
+
+        

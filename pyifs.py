@@ -68,6 +68,9 @@ class LinearTransform(Transform):
     def transform(self, px, py):
         return (self.a * px + self.b * py, self.c * px + self.d * py)
 
+    def __str__(self):
+        return "Linear:[[{:+0.5f},{:+0.5f}],[{:+0.5f},{:+0.5f}]]".format(self.a, self.b, self.c, self.d)
+    
 class RandomLinearTransform(LinearTransform):
     ''' an extension of a linear transformation that randomly is generated '''
     def __init__(self, bounds=(-1,1)):
@@ -88,7 +91,23 @@ class AffineTransform(Transform):
     def transform(self, px, py):
         return ((self.a * px + self.b * py) + self.xshift,
                 (self.c * px + self.d * py) + self.yshift)
-    
+
+    def __str__(self):
+        return "Affine:[[{:+0.5f},{:+0.5f}],[{:+0.5f},{:+0.5f}]]+[{:+0.5f},{:+0.5f}]".format(self.a, self.b, self.c, self.d, self.xshift, self.yshift)
+
+class RandomAffineTransform(AffineTransform):
+    ''' an affine transfromation, combination of linear transform and translation'''
+    def __init__(self, bounds=(-1,1), shift=(-2,2)):
+        a = random.uniform(*bounds)
+        b = random.uniform(*bounds)
+        c = random.uniform(*bounds)
+        d = random.uniform(*bounds)
+        m = [[a,b],[c,d]]
+        x = random.uniform(*shift)
+        y = random.uniform(*shift)
+        s = [x,y]
+        super(RandomAffineTransform, self).__init__(m,s)
+        
 class ComplexTransform(Transform):
     ''' base class for a complex transformation ''' 
     def transform(self, px, py):
@@ -107,6 +126,9 @@ class MoebiusTransform(ComplexTransform):
     def f(self, z):
         ''' function defining the transformation '''
         return (self.pre_a * z + self.pre_b) / (self.pre_c * z + self.pre_d)
+
+    def __str__(self):
+        return "Moebius:(({0.real:.5f}+{0.imag:.5f}i)z+({1.real:.5f}+{1.imag:.5f}i))/(({2.real:.5f}+{2.imag:.5f}i)z+({3.real:.5f}+{3.imag:.5f}i))".format(self.pre_a, self.pre_b, self.pre_c, self.pre_d)
 
 class MoebiusBase(ComplexTransform):
     def __init__(self):
@@ -128,9 +150,9 @@ class MoebiusBase(ComplexTransform):
 class InverseJulia(ComplexTransform):    
     def __init__(self):
         super(InverseJulia, self).__init__()
-        r = sqrt(random.random()) * 0.4 + 0.8
-        theta = 2 * pi * random.random()
-        self.c = complex(r * cos(theta), r * sin(theta))
+        self.r = sqrt(random.random()) * 0.4 + 0.8
+        self.theta = 2 * pi * random.random()
+        self.c = complex(self.r * cos(self.theta), self.r * sin(self.theta))
     
     def f(self, z):
         z2 = self.c - z
@@ -138,6 +160,9 @@ class InverseJulia(ComplexTransform):
         sqrt_r = random.choice([1, -1]) * ((z2.imag * z2.imag + z2.real * z2.real) ** 0.25)
         return complex(sqrt_r * cos(theta), sqrt_r * sin(theta))
 
+    def __str__(self):
+        return "Inverse Julia: r={}, theta={}".format(self.r, self.theta)
+    
 def get_args():
     ap = argparse.ArgumentParser()
     ap.add_argument("configuration")
@@ -160,12 +185,16 @@ if __name__ == "__main__":
     h = Image(WIDTH, HEIGHT)
     ifs = IFS()
 
+    f = open("system.txt", "w")
     # initialize transforms
     for transform_type in config['transforms']:
         transform = getattr(sys.modules[__name__], transform_type)
         for t in config['transforms'][transform_type]:
-            ifs.add_transform(transform(**t))
+            tt = transform(**t)
+            f.write(str(tt) + "\n")
+            ifs.add_transform(tt)
 
+    f.close()
     # run!
     for i in range(NUM_POINTS):
         px = random.uniform(-1, 1)
@@ -180,7 +209,6 @@ if __name__ == "__main__":
             fx, fy = ifs.final_transform(px, py)
             x = int((fx + 1) * WIDTH / 2)
             y = int((fy + 1) * HEIGHT / 2)
-        
             h.add_radiance(x, y, [r, g, b])
 
     # save image

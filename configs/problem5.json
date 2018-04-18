@@ -1,0 +1,26 @@
+{
+    "image_settings":{
+        "width":512,
+        "height":512,
+        "path":"problem5.png"
+    },
+    "evaluation_settings":{
+        "iterations":10000,
+        "num_points":1000
+    },
+    "transforms":{
+        "AffineTransform":
+        [{
+            "matrix":[[0.33,0.0],[0.0,0.33]],
+            "translation":[-1.0,1.0]
+        },
+         {
+             "matrix":[[0.33,0.0],[0.0,0.33]],
+             "translation":[1.0,1.0]
+         },
+         {
+             "matrix":[[0.66,0.0],[0.0,0.66]],
+             "translation":[0.0,0.0]
+         }]
+    }
+}

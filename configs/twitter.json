@@ -1,0 +1,20 @@
+{
+    "image_settings":{
+        "width":1000,
+        "height":1000,
+        "path":"twitter.png"
+    },
+    "evaluation_settings":{
+        "iterations":15000,
+        "num_points":3000
+    },
+    "transforms":{
+        "InverseJulia":[{}],
+        "RandomAffineTransform":[{}],
+        "MoebiusTransform":[{}]
+    }
+}
+        
+        
+
+        
