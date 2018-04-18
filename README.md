@@ -33,10 +33,11 @@ point) and returns a new x, y.
 To-do
 -----
 
+- let evaluation of iterated function system be multithreaded
 - Check on why fern is not centered
 - Allow customization of image output (background, color schemes)
-- Make an easier input method?
-- add non probabilistic mode and allow for viewing of iterated steps
+- Make an easier input method? graphical? 
+- add deterministic mode and allow for viewing of iterated steps
 
 Examples
 --------
