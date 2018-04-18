@@ -9,6 +9,13 @@ class IFS:
         self.transforms = []
         self.total_weight = 0
 
+    def random(self, count,
+               allowed_transforms=[transform.RandomAffineTransform,
+                                   transform.RandomMoebiusTransform,
+                                   transform.RandomInverseJuliaTransform]):
+        for t in random.choices(allowed_transforms, k=count):
+            self.add_transform(t)
+        
     def from_dict(self, dictionary):
         ''' read in from a dictionary
         this has easy support for reading in from the json transforms section 
@@ -75,3 +82,5 @@ class IFS:
                 y = int((fy + 1) * height / 2)
                 image.add_radiance(x, y, [r, g, b])
         return image
+
+    

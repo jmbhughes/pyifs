@@ -30,7 +30,7 @@ class Transform(object):
     def __dict__(self):
         ''' convert to a dictionary of required parameters '''
         pass
-    
+
 class LinearTransform(Transform):
     ''' a linear transformation as described by a matrix [[a,b],[c,d]] '''
     def __init__(self,matrix):
@@ -96,6 +96,7 @@ class ComplexTransform(Transform):
 
 class MoebiusTransform(ComplexTransform):
     def __init__(self, a, b, c, d):
+        super(MoebiusTransform, self).__init__()
         self.pre_a = a
         self.pre_b = b
         self.pre_c = c
@@ -143,7 +144,7 @@ class RandomMoebiusTransform(MoebiusTransform):
 
 class InverseJuliaTransform(ComplexTransform):    
     def __init__(self, r, theta):
-        super(InverseJulia, self).__init__()
+        super(InverseJuliaTransform, self).__init__()
         self.r = r
         self.theta = theta
         self.c = complex(self.r * cos(self.theta), self.r * sin(self.theta))
